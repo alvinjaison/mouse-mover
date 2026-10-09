@@ -1,0 +1,18 @@
+# Git worktrees
+/.worktrees/
+
+# Build output
+/bin/
+/dist/
+*.exe
+*.exe~
+*.zip
+
+# Go
+*.test
+*.out
+vendor/
+
+# OS / editor
+.DS_Store
+Thumbs.db
