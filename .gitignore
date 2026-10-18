@@ -16,3 +16,6 @@ vendor/
 # OS / editor
 .DS_Store
 Thumbs.db
+
+# Kiro IDE local tooling / agent workflows
+.kiro/
