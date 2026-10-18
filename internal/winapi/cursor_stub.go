@@ -11,6 +11,6 @@ func NewCursorController() engine.CursorController {
 	return &stubController{}
 }
 
-func (s *stubController) GetPos() (engine.Point, error)        { return engine.Point{}, ErrUnsupported }
-func (s *stubController) MoveTo(engine.Point) error             { return ErrUnsupported }
-func (s *stubController) VirtualScreen() (engine.Rect, error)   { return engine.Rect{}, ErrUnsupported }
+func (s *stubController) GetPos() (engine.Point, error)       { return engine.Point{}, ErrUnsupported }
+func (s *stubController) MoveTo(engine.Point) error           { return ErrUnsupported }
+func (s *stubController) VirtualScreen() (engine.Rect, error) { return engine.Rect{}, ErrUnsupported }

@@ -13,11 +13,11 @@ import (
 )
 
 var (
-	user32      = windows.NewLazySystemDLL("user32.dll")
-	getCursorP  = user32.NewProc("GetCursorPos")
-	setCursorP  = user32.NewProc("SetCursorPos")
-	sendInputP  = user32.NewProc("SendInput")
-	getSysMetr  = user32.NewProc("GetSystemMetrics")
+	user32     = windows.NewLazySystemDLL("user32.dll")
+	getCursorP = user32.NewProc("GetCursorPos")
+	setCursorP = user32.NewProc("SetCursorPos")
+	sendInputP = user32.NewProc("SendInput")
+	getSysMetr = user32.NewProc("GetSystemMetrics")
 )
 
 // Win32 constants.
@@ -27,9 +27,9 @@ const (
 	smCXVirtualScreen = 78
 	smCYVirtualScreen = 79
 
-	inputMouse           = 0
-	mouseeventfMove      = 0x0001
-	mouseeventfAbsolute  = 0x8000
+	inputMouse             = 0
+	mouseeventfMove        = 0x0001
+	mouseeventfAbsolute    = 0x8000
 	mouseeventfVirtualDesk = 0x4000
 )
 

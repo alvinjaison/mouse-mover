@@ -71,22 +71,22 @@ const (
 
 // control IDs
 const (
-	idStartBtn     = 101
-	idStopBtn      = 102
-	idPatternCB    = 103
-	idDurCheck     = 110
-	idDurCB        = 111
-	idDurHrsEdit   = 112
-	idDurMinEdit   = 113
-	idIntCheck     = 120
-	idIntCB        = 121
-	idIntSecEdit   = 122
-	idTimerUpdate  = 1
-	idTrayMsg      = wmApp + 1
-	idTrayShow     = 201
-	idTrayStart    = 202
-	idTrayStop     = 203
-	idTrayExit     = 204
+	idStartBtn    = 101
+	idStopBtn     = 102
+	idPatternCB   = 103
+	idDurCheck    = 110
+	idDurCB       = 111
+	idDurHrsEdit  = 112
+	idDurMinEdit  = 113
+	idIntCheck    = 120
+	idIntCB       = 121
+	idIntSecEdit  = 122
+	idTimerUpdate = 1
+	idTrayMsg     = wmApp + 1
+	idTrayShow    = 201
+	idTrayStart   = 202
+	idTrayStop    = 203
+	idTrayExit    = 204
 )
 
 var (
@@ -134,7 +134,7 @@ type wndClassEx struct {
 	HbrBackground uintptr
 	LpszMenuName  uintptr
 	LpszClassName uintptr
-	HIconSm      uintptr
+	HIconSm       uintptr
 }
 
 type msg struct {
@@ -231,8 +231,8 @@ func sendMsg(hwnd uintptr, m uint32, wp, lp uintptr) uintptr {
 	return r
 }
 
-func cbAddStr(hwnd uintptr, s string)     { sendMsg(hwnd, cbAddString, 0, mustUTF16Ptr(s)) }
-func setWndText(hwnd uintptr, s string)   { sendMsg(hwnd, wmSetText, 0, mustUTF16Ptr(s)) }
+func cbAddStr(hwnd uintptr, s string)   { sendMsg(hwnd, cbAddString, 0, mustUTF16Ptr(s)) }
+func setWndText(hwnd uintptr, s string) { sendMsg(hwnd, wmSetText, 0, mustUTF16Ptr(s)) }
 
 func getWndText(hwnd uintptr) string {
 	n := int(sendMsg(hwnd, wmGetTextLength, 0, 0))
@@ -295,7 +295,7 @@ func Run(cfg config.Config, eng *engine.Engine, saveCfg func(config.Config)) err
 		HCursor:       hCursor,
 		HbrBackground: colorBtnFace + 1,
 		LpszClassName: className,
-		HIconSm:      gHIcon,
+		HIconSm:       gHIcon,
 	}
 
 	r, _, err := pRegisterClassEx.Call(uintptr(unsafe.Pointer(&wc)))

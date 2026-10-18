@@ -10,13 +10,13 @@ import (
 )
 
 const (
-	MinDurationMinutes    = 1
-	MaxDurationMinutes    = 24 * 60 // 1440 = 24 hours
-	MinMoveIntervalSecs   = 10
-	MaxMoveIntervalSecs   = 300
-	DefaultMoveIntervalS  = 30
-	MinDelta              = 1
-	MaxDelta              = 20
+	MinDurationMinutes   = 1
+	MaxDurationMinutes   = 24 * 60 // 1440 = 24 hours
+	MinMoveIntervalSecs  = 10
+	MaxMoveIntervalSecs  = 300
+	DefaultMoveIntervalS = 30
+	MinDelta             = 1
+	MaxDelta             = 20
 )
 
 var validPatterns = map[string]bool{
