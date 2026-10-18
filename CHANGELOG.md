@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-18
+
 ### Added
 
 - Open-source project files: `LICENSE` (MIT), `CONTRIBUTING.md`,
@@ -34,5 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Multi-monitor aware cursor clamping.
 - Persistent JSON settings under the per-user application-data directory.
 
-[Unreleased]: https://github.com/alvinjaison/mouse-mover/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/alvinjaison/mouse-mover/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/alvinjaison/mouse-mover/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/alvinjaison/mouse-mover/releases/tag/v0.1.0
