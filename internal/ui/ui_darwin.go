@@ -20,9 +20,23 @@ extern void CocoaStop(void);
 import "C"
 
 import (
+	"runtime"
+
 	"github.com/jarvis/mouse-mover/internal/config"
 	"github.com/jarvis/mouse-mover/internal/engine"
 )
+
+func init() {
+	// Cocoa requires that NSApplication and all AppKit UI run on the process
+	// main thread (thread 0). Go does not guarantee which OS thread a goroutine
+	// runs on, so lock the main goroutine to its starting thread here. Because
+	// init() runs on the main goroutine before main(), and the main goroutine
+	// starts on the main OS thread, this pins all subsequent AppKit calls
+	// (RunCocoaApp -> [app run], the status bar item, menus) to the main thread.
+	// Without this, [NSApplication run] may execute off-main and the menu bar
+	// status item silently never appears.
+	runtime.LockOSThread()
+}
 
 var (
 	gEng     *engine.Engine
@@ -31,6 +45,8 @@ var (
 )
 
 // Run starts the macOS menu bar app. Blocks until quit.
+// It must be called from the main goroutine (which main.go does), so that the
+// locked main OS thread drives the Cocoa run loop.
 func Run(cfg config.Config, eng *engine.Engine, saveCfg func(config.Config)) error {
 	gEng = eng
 	gCfg = cfg
