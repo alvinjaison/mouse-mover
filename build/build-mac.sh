@@ -5,26 +5,26 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$PROJECT_DIR"
 
-echo "==> Building Mouse Mover for macOS..."
+echo "==> Building Mouse Mover for macOS (universal: arm64 + amd64)..."
 mkdir -p dist
 
-# Detect architecture
-ARCH=$(uname -m)
-if [ "$ARCH" = "arm64" ]; then
-    GOARCH="arm64"
-elif [ "$ARCH" = "x86_64" ]; then
-    GOARCH="amd64"
-else
-    GOARCH="arm64"
-fi
+# Build both architecture slices. The darwin build uses cgo (Core Graphics /
+# Cocoa), so cross-compiling each slice needs the matching clang -arch flag.
+echo "    Building arm64 slice..."
+CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 CC="clang -arch arm64" \
+  go build -ldflags "-s -w" -o dist/MouseMover-arm64 ./cmd/mousemover
 
-echo "    Architecture: $GOARCH"
+echo "    Building amd64 slice..."
+CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 CC="clang -arch x86_64" \
+  go build -ldflags "-s -w" -o dist/MouseMover-amd64 ./cmd/mousemover
 
-CGO_ENABLED=1 GOOS=darwin GOARCH=$GOARCH \
-  go build -ldflags "-s -w" \
-  -o dist/MouseMover ./cmd/mousemover
+# Combine into a single universal (fat) binary.
+echo "    Combining into universal binary..."
+lipo -create -output dist/MouseMover dist/MouseMover-arm64 dist/MouseMover-amd64
+rm -f dist/MouseMover-arm64 dist/MouseMover-amd64
 
 echo "==> Built: dist/MouseMover"
+file dist/MouseMover
 ls -lh dist/MouseMover
 
 # Create a minimal .app bundle
